@@ -12,7 +12,7 @@ int findAccount(string account); /* Validar que la cuenta existe en el array de 
 
 int main(){
 
-    cout<<"Bienvenido a cajeros pato.\n";
+    cout<<"Bienvenido a cajeros pato.";
 
     /* Ciclo para que no se salga al terminar las operaciones */
     do
@@ -112,12 +112,17 @@ int main(){
                         accBalance = stod(accounts[tempAccInd][1]); /* Balance de cuenta origen */
                         destAccBal = stod(accounts[destAccInd][1]); /* Balance de cuenta destino */
 
-                        accounts[tempAccInd][1] = to_string(accBalance - moneyToTransf); /* Restar el dinero de la cuenta origen*/
-                        accounts[destAccInd][1] = to_string(destAccBal + moneyToTransf); /* Sumar el dinero a la cuenta destino*/
+                        if(moneyToTransf > accBalance){
+                            cout<<"No posee de los suficientes fondos para realizar esta transaccion. Intentelo de nuevo.";
+                        }else{
+                            accounts[tempAccInd][1] = to_string(accBalance - moneyToTransf); /* Restar el dinero de la cuenta origen*/
+                            accounts[destAccInd][1] = to_string(destAccBal + moneyToTransf); /* Sumar el dinero a la cuenta destino*/
+                            cout<<"Operacion exitosa. Saldo restante: $"<<accounts[tempAccInd][1];
+                        }   
                         accBalance = 0; /* Reseteo a la variable por seguridad */
                         destAccBal = 0; /* Reseteo a la variable por seguridad*/
 
-                        cout<<"Operacion exitosa. Saldo restante: $"<<accounts[tempAccInd][1];
+                        
                     }else{
                         cout<<"La cuenta destino no es valida, vuelva a intentarlo\n";
                     }
